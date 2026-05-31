@@ -1,4 +1,4 @@
-# GhostProxy 👻
+# GhostProxy 
 
 **Intelligent Traffic Proxy & Local-First Microservices Debugger**
 
@@ -8,22 +8,22 @@ Instead of spinning up 5+ dependent Docker Compose services that drain your CPU 
 
 ---
 
-## ⚡ Core Features (The 3 Modes)
+##  Core Features (The 3 Modes)
 
 GhostProxy operates as a state machine with three distinct pipelines. You configure the mode globally, or override it on startup.
 
-### 1. ⏺️ Record Mode (Default)
+### 1. Record Mode (Default)
 In this mode, GhostProxy acts as a transparent passthrough to your real upstream service. However, it secretly captures the full HTTP response (headers, status, JSON body) and persists it to a deterministic MD5-hashed snapshot file inside the `./mappings` directory.
 
-### 2. 🔄 Replay Mode
+### 2. Replay Mode
 When your real upstream service is down (or you don't want to run it to save RAM), switch to Replay mode. GhostProxy intercepts the network request, looks up the MD5 hash in the `./mappings` directory, and instantly returns the cached JSON snapshot. **Live network latency is completely eliminated.**
 
-### 3. 💥 Chaos Mode
+### 3. Chaos Mode
 Testing how your frontend handles a 504 Gateway Timeout or a 2.5-second latency spike usually requires hardcoding mock errors or killing docker containers. In Chaos Mode, GhostProxy evaluates dynamic rules defined in your `config.yaml` to artificially degrade performance on a per-route basis.
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 - Go 1.22+
@@ -51,7 +51,7 @@ Change your frontend application (or Postman/cURL) to point to GhostProxy instea
 
 ---
 
-## ⚙️ Configuration (`config.yaml`)
+## Configuration (`config.yaml`)
 
 The entire engine is driven by a declarative YAML file.
 
@@ -88,7 +88,7 @@ routes:
 
 ---
 
-## 🛠️ Administrative Dashboard
+## Administrative Dashboard
 
 GhostProxy ships with a built-in health and status endpoint. While the proxy is running, you can hit it to check the active mode and snapshot inventory.
 
@@ -109,7 +109,7 @@ curl http://localhost:8080/__ghostproxy/status
 
 ---
 
-## 🐛 Debugging in VS Code / Antigravity
+## Debugging in VS Code / Antigravity
 
 This repository includes a highly-optimized `.vscode/launch.json` file. 
 
