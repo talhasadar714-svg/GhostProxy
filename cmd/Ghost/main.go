@@ -100,7 +100,7 @@ func main() {
 	// Start the HTTP server in a separate goroutine
 	serverErrors := make(chan error, 1)
 	go func() {
-		logger.Printf("🚀 GhostProxy listening on http://%s", cfg.ListenAddr())
+		logger.Printf("GhostProxy listening on http://%s", cfg.ListenAddr())
 		logger.Printf("   Status endpoint: http://%s/__ghostproxy/status", cfg.ListenAddr())
 		fmt.Println()
 		serverErrors <- server.ListenAndServe()
@@ -127,6 +127,6 @@ func main() {
 			}
 		}
 
-		logger.Println("GhostProxy shut down gracefully. Goodbye! 👻")
+		logger.Println("GhostProxy shut down gracefully. Goodbye! ")
 	}
 }
