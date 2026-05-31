@@ -1,0 +1,85 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "GhostProxy — Debug",
+      "type": "go",
+      "request": "launch",
+      "mode": "debug",
+      "program": "${workspaceFolder}/cmd/Ghost",
+      "cwd": "${workspaceFolder}",
+      "args": [
+        "--config",
+        "${workspaceFolder}/config.yaml"
+      ],
+      "env": {
+        "GHOSTPROXY_ENV": "development"
+      },
+      "showLog": true,
+      "trace": "verbose"
+    },
+    {
+      "name": "GhostProxy — Record Mode",
+      "type": "go",
+      "request": "launch",
+      "mode": "debug",
+      "program": "${workspaceFolder}/cmd/Ghost",
+      "cwd": "${workspaceFolder}",
+      "args": [
+        "--config",
+        "${workspaceFolder}/config.yaml",
+        "--mode",
+        "record"
+      ],
+      "env": {
+        "GHOSTPROXY_ENV": "development"
+      },
+      "showLog": true
+    },
+    {
+      "name": "GhostProxy — Replay Mode",
+      "type": "go",
+      "request": "launch",
+      "mode": "debug",
+      "program": "${workspaceFolder}/cmd/Ghost",
+      "cwd": "${workspaceFolder}",
+      "args": [
+        "--config",
+        "${workspaceFolder}/config.yaml",
+        "--mode",
+        "replay"
+      ],
+      "env": {
+        "GHOSTPROXY_ENV": "development"
+      },
+      "showLog": true
+    },
+    {
+      "name": "GhostProxy — Chaos Mode",
+      "type": "go",
+      "request": "launch",
+      "mode": "debug",
+      "program": "${workspaceFolder}/cmd/Ghost",
+      "cwd": "${workspaceFolder}",
+      "args": [
+        "--config",
+        "${workspaceFolder}/config.yaml",
+        "--mode",
+        "chaos"
+      ],
+      "env": {
+        "GHOSTPROXY_ENV": "development"
+      },
+      "showLog": true
+    },
+    {
+      "name": "GhostProxy — Attach to Process",
+      "type": "go",
+      "request": "attach",
+      "mode": "local",
+      "processId": "${command:pickGoProcess}",
+      "showLog": true,
+      "trace": "verbose"
+    }
+  ]
+}

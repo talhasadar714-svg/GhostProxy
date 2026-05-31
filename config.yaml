@@ -1,0 +1,70 @@
+# ============================================================================
+# GhostProxy — Intelligent Traffic Proxy Configuration
+# ============================================================================
+# Operational modes: record | replay | chaos
+# In 'record' mode, GhostProxy captures all downstream HTTP responses and
+# persists structured snapshots to the local mappings directory.
+# In 'replay' mode, GhostProxy short-circuits live network requests by
+# serving cached snapshots, eliminating upstream latency entirely.
+# In 'chaos' mode, GhostProxy evaluates per-route chaos rules to inject
+# artificial latency, trigger simulated outages, or return custom errors.
+# ============================================================================
+
+server:
+  host: "0.0.0.0"
+  port: 8080
+
+# Global operational mode (can be overridden via CLI --mode flag)
+mode: "record"
+
+upstream:
+  # The real downstream service target that GhostProxy will proxy to
+  target: "http://localhost:3000"
+  # Maximum time in seconds to wait for upstream response
+  timeout_seconds: 30
+
+# Route-specific configurations with optional chaos injection metadata
+routes:
+  - path: "/api/v1/users"
+    methods: ["GET", "POST", "PUT"]
+    chaos:
+      enabled: false
+      latency_ms: 0
+      error_code: 0
+      error_message: ""
+
+  - path: "/api/v1/orders"
+    methods: ["GET", "POST"]
+    chaos:
+      enabled: true
+      latency_ms: 2500
+      error_code: 503
+      error_message: "Service Unavailable — Simulated downstream outage via GhostProxy chaos injection"
+
+  - path: "/api/v1/payments"
+    methods: ["POST"]
+    chaos:
+      enabled: true
+      latency_ms: 5000
+      error_code: 504
+      error_message: "Gateway Timeout — Payment gateway unreachable (chaos simulation)"
+
+  - path: "/api/v1/inventory"
+    methods: ["GET"]
+    chaos:
+      enabled: true
+      latency_ms: 800
+      error_code: 0
+      error_message: ""
+
+  - path: "/health"
+    methods: ["GET"]
+    chaos:
+      enabled: false
+      latency_ms: 0
+      error_code: 0
+      error_message: ""
+
+# Local storage configuration for response snapshots
+storage:
+  directory: "./mappings"
